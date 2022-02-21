@@ -1,0 +1,33 @@
+
+start: statements
+
+statements: statement
+          | statement ";" statements
+
+statement:  queries
+         |  updates
+
+query:  "SELECT" columns "FROM" queries
+     |  "SELECT" columns "FROM" queries "WHERE" filters
+     |  "VALUES" tuples
+
+expr: 
+
+expr_list: expr
+         | expr "," expr_list
+
+tuple: "(" expr_list ")"
+
+tuple_list: tuple
+          | tuple "," tuple_list
+
+tuples: tuple
+      | "(" tuple_list ")"
+
+queries:
+
+"(" query_list ")"
+
+COMMENT: /\s*/ "--" /[^\n]/*
+
+%ignore COMMENT
